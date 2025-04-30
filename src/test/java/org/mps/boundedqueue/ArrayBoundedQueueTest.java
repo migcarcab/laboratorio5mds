@@ -70,9 +70,11 @@ public class ArrayBoundedQueueTest {
     @Test
     @DisplayName("Lanza excepción al insertar en una cola llena")
     void lanzarExcepcionCuandoLlenaTest() {
+        // Arrange
         ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
         cola.put(1);
         cola.put(2);
+        // Act & Assert
         assertThatThrownBy(() -> cola.put(3))
                 .isInstanceOf(FullBoundedQueueException.class)
                 .hasMessageContaining("full bounded queue");
@@ -81,7 +83,9 @@ public class ArrayBoundedQueueTest {
     @Test
     @DisplayName("Lanza excepción al intentar insertar un elemento nulo")
     void lanzarExcepcionCuandoNuloTest() {
+        // Arrange
         ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
+        // Act & Assert
         assertThatThrownBy(() -> cola.put(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("element cannot be null");
