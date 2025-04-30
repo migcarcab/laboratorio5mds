@@ -150,4 +150,20 @@ public class ArrayBoundedQueueTest {
         assertThat(it.hasNext()).isFalse();
     }
 
+    @Test
+    @DisplayName("Iterator lanza excepción cuando no hay más elementos")
+    void iteradorDaErrorCuandoNoHayMasElmentosTest() {
+        // Arrange
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
+        cola.put(1);
+        Iterator<Integer> it = cola.iterator();
+        // Consumimos el único elemento
+        it.next();
+        // Act & Assert
+        assertThat(it.hasNext()).isFalse();
+        assertThatThrownBy(() -> it.next())
+                .isInstanceOf(java.util.NoSuchElementException.class)
+                .hasMessageContaining("next: bounded queue iterator exhausted");
+    }
+
 }
