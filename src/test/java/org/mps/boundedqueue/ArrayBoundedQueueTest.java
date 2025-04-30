@@ -7,13 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 public class ArrayBoundedQueueTest {
     @Test
     @DisplayName("Constructor con size negativo")
-    public void constructor_NegativeSize_Test(){
+    public void constructor_NegativeSize_Test() {
         // Arrange
-        int size=-3;
-        //Act && Assert
-        assertThatThrownBy(()-> new ArrayBoundedQueue<>(size))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("ArrayBoundedException: capacity must be positive");
+        int size = -3;
+        // Act && Assert
+        assertThatThrownBy(() -> new ArrayBoundedQueue<>(size))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("ArrayBoundedException: capacity must be positive");
 
     }
 
@@ -112,6 +112,19 @@ public class ArrayBoundedQueueTest {
         assertThatThrownBy(() -> cola.get())
                 .isInstanceOf(EmptyBoundedQueueException.class)
                 .hasMessageContaining("empty bounded queue");
+    }
+
+    @Test
+    @DisplayName("Comprobar el indice del primer elemento")
+    void primerElementoIndexTest() {
+        // Arrange
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(3);
+        cola.put(1);
+        cola.put(2);
+        // Act
+        int primerElemento = cola.getFirst();
+        // Assert
+        assertThat(primerElemento).isEqualTo(0);
     }
 
 }
