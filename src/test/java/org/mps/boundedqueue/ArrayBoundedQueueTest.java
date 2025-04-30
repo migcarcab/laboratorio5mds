@@ -6,6 +6,18 @@ import org.junit.jupiter.api.DisplayName;
 
 public class ArrayBoundedQueueTest {
     @Test
+    @DisplayName("Constructor con size negativo")
+    public void constructor_NegativeSize_Test(){
+        // Arrange
+        int size=-3;
+        //Act && Assert
+        assertThatThrownBy(()-> new ArrayBoundedQueue<>(size))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("ArrayBoundedException: capacity must be positive");
+
+    }
+
+    @Test
     @DisplayName("Insertar elementos en la cola")
     void ponerTest() {
         // Arrange
