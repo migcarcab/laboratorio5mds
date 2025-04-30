@@ -66,4 +66,15 @@ public class ArrayBoundedQueueTest {
         cola.put(1);
         assertThat(cola.size()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("Lanza excepción al insertar en una cola llena")
+    void lanzarExcepcionCuandoLlenaTest() {
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
+        cola.put(1);
+        cola.put(2);
+        assertThatThrownBy(() -> cola.put(3))
+                .isInstanceOf(FullBoundedQueueException.class)
+                .hasMessageContaining("full bounded queue");
+    }
 }
