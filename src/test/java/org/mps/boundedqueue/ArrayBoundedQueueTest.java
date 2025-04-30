@@ -103,4 +103,15 @@ public class ArrayBoundedQueueTest {
                 .hasMessageContaining("element cannot be null");
     }
 
+    @Test
+    @DisplayName("Lanza excepción al obtener de una cola vacía")
+    void lanzarExcepcionCuandoVaciaTest() {
+        // Arrange
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
+        // Act & Assert
+        assertThatThrownBy(() -> cola.get())
+                .isInstanceOf(EmptyBoundedQueueException.class)
+                .hasMessageContaining("empty bounded queue");
+    }
+
 }
