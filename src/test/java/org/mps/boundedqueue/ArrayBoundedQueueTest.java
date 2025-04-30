@@ -164,6 +164,25 @@ public class ArrayBoundedQueueTest {
         assertThatThrownBy(() -> it.next())
                 .isInstanceOf(java.util.NoSuchElementException.class)
                 .hasMessageContaining("next: bounded queue iterator exhausted");
+
+    }
+
+    
+    @Test
+    @DisplayName("Comprobar el último elemento de la cola")
+    public void lastElement_Test(){
+        //Arrange
+        int size = 6;
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(size);
+        int v1 = 33;
+        int v2 = 55;
+        int v3 = 88;
+        //Act
+        cola.put(v1);
+        cola.put(v2);
+        cola.put(v3);
+        //Assert
+        assertThat(cola.getLast()).isEqualTo(3);
     }
 
 }
