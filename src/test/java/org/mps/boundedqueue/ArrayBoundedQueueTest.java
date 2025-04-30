@@ -1,6 +1,9 @@
 package org.mps.boundedqueue;
 
 import static org.assertj.core.api.Assertions.*;
+
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -125,6 +128,26 @@ public class ArrayBoundedQueueTest {
         int primerElemento = cola.getFirst();
         // Assert
         assertThat(primerElemento).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Comprobar funcionamiento del iterator")
+    void iteratorTest() {
+        // Arrange
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(3);
+        cola.put(10);
+        cola.put(20);
+        cola.put(30);
+        // Act
+        Iterator<Integer> it = cola.iterator();
+        // Assert
+        assertThat(it.hasNext()).isTrue();
+        assertThat(it.next()).isEqualTo(10);
+        assertThat(it.hasNext()).isTrue();
+        assertThat(it.next()).isEqualTo(20);
+        assertThat(it.hasNext()).isTrue();
+        assertThat(it.next()).isEqualTo(30);
+        assertThat(it.hasNext()).isFalse();
     }
 
 }
