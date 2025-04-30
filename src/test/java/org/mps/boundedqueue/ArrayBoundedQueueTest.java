@@ -77,4 +77,14 @@ public class ArrayBoundedQueueTest {
                 .isInstanceOf(FullBoundedQueueException.class)
                 .hasMessageContaining("full bounded queue");
     }
+
+    @Test
+    @DisplayName("Lanza excepción al intentar insertar un elemento nulo")
+    void lanzarExcepcionCuandoNuloTest() {
+        ArrayBoundedQueue<Integer> cola = new ArrayBoundedQueue<>(2);
+        assertThatThrownBy(() -> cola.put(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("element cannot be null");
+    }
+
 }
